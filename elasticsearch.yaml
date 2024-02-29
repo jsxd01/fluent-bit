@@ -1,0 +1,18 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: quickstart
+  annotations:
+    fluentbit.io/exclude: "true"
+spec:
+  version: 8.12.2
+  http:
+    tls:                         # This section defines TLS settings
+      selfSignedCertificate:     # Optional: Specify a self-signed certificate if needed
+        disabled: true           # Disable self-signed certificate generation
+  nodeSets:
+  - name: default
+    count: 1
+    config:
+      node.store.allow_mmap: false
+
